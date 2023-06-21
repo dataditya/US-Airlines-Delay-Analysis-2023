@@ -126,6 +126,65 @@ max      1310.000000
 - Maxium number of flights depart between ~(660-710) minutes from midnight.
 - The two empty zones identified above are not ture. There are some flights departing at almost every time stamp. 
 
+- You can also plot a boxplot:
+
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/e7a11f0e-d5e2-4a1e-93b1-9a552f42573b)
+
+**Observations till now:**
+- 75% of all the long duration flights depart before 6:00 PM in the evening.
+- 50% of flights depart before 12:00 PM in the afternoon.
+- The earliest long duration flight departs at 9:00 AM.
+- The last long duration flight departs at 10:50 PM.
+
+- You can also perform **t-test and ANOVA test**
+T-test: T-statistic = 3.335989828914716 p-value = 0.0008500226450162412
+ANOVA: F-statistic = 4299971.900179982 p-value = 0.0
+- **T-test Result**: The t-statistic of 3.336 indicates a significant difference in the means of departure times between long-duration flights and other-duration flights. This suggests that there is a distinct pattern or variation in the departure times of long-duration flights compared to other-duration flights.
+
+- **ANOVA Result**: The ANOVA test indicates a significant difference in departure times across different flight durations, including long-duration flights. This suggests that the departure times of long-duration flights are not only different from other-duration flights but also show variation within the group of long-duration flights themselves. This further supports the existence of patterns or systematic differences in the departure times of long-duration flights.
+
+_____________
+**How large hubs compare to medium hubs in terms of count of delayed flights? Use appropriate visualization to represent your findings.**
+
+- Bar chart visualization:
+
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/79999c99-7523-4fe9-973a-01840fa1cadf)
+
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/c5c9016c-feb8-4d73-aa9c-503cf5cd23e1)
+
+- Stacked-bar chart showing both delayed and non-delayed flights for large and medium airport:
+
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/df178f67-6228-47a1-a61b-b511b8bf6121)
+
+- The plot shows us that there is a significant difference between the number of flights large and medium airports handle. 
+**Medium airports have a higher ratio of non-delayed flights**. This could mean that given the traffic each type of hub handles, medium airports are better at ensuring timely take-offs.
+
+- We can also use mean to answer this question:
+- Large airports have a 46% delay where as medium airports have 39% delay. Therefore, we can conclude that **large_airports have a higher chance of a delayed flights than medium_airports**. 
+
+____________
+**For large hubs, forecast the number of passengers for 2022 using simple moving average method.**
+- Plotting a time-series for every airport:
+
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/1977cc2f-d138-435c-9911-304e3364a307)
+
+- Seasonal decomposition charts for the top four airports with max traffic:
+
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/337de89e-7fc5-47c9-b7f7-45de82677598)
+
+**Observations:**
+- The **trend** for all four airports is that the traffic is on an uptrend after a major drop in 2019 due to COVID. 
+- The seasonality shows that there are no recurring patterns in the traffic data. 
+- The residual shows that there are no abnormnal patterns in the traffic data.
+
+- Calculate rolling mean forecasts for different window sizes and select the best window size based on the minimum MAPE.
+
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/48a7e46a-e1fb-45d6-be5b-8a004ec16fe7)
+
+**As we saw in the line chart earlier, the airports: ATL, DFW, DEN,and ORD will witness the maximum traffic in 2022.** 
+
+
+
 
 
 
