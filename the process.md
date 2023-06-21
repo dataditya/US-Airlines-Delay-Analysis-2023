@@ -58,8 +58,74 @@ ___________
 - Calculate the % of delays for SouthWest Airlines and cross-check the stats in first task.
 round((cdt[cdt.Airline == southwestid].Delay.sum()/
       cdt[cdt.Airline == southwestid].Delay.size)*100)
-- Plot a bar chart:
+- Plot a bar chart % delay for each airline:
 -![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/be793835-0a60-403a-ac7b-18e766052172)
 - **As we can see in the above bar chart, SouthWest airlines has the most delayed flgihts i.e. 69.8% to be exact.**
 **Mesa** is the airlines with least delays.
+
+___________
+**Which days of the week are the safest to travel?**
+
+- Calcuate the % of flights that are delayed for each weekday by grouping the dataset by **DayOfWeek** column.
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/6d8fbb05-d28c-4591-ac10-625bd098123a)
+
+- Plot a bar chart to visualize the % delay every day of the week:
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/8b282cb4-dcdf-4de6-a909-69c004d4a7c9)
+
+- You can also plot a pie chart for easier understanding:
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/c3c9e400-1862-4536-9706-42f9dbffe2d1)
+
+**From the bar chart and pie-chart above, we can see that Friday and Saturday have the shortest bars for % delays, hence these two days are the safest to travel.**
+
+_________
+**Which airlines to recommend for short, medium, and long length travel?**
+
+- Create a dataset 'duration' with 'Airline', 'Length' and 'Delay' columns of the main dataset (combined_data_traffic) or cdt.
+- Create a new column duration['travel_time'] which contains values by creating 3 equal width bings of the 'Length' column into 'short', 'medium', and 'long'.
+- Group by the dataset using the 'Airline' column and applying a delay_percent function that calculates the % of each airline delay in short, medium, and long distance travels. 
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/41f0767a-8af0-42e3-9e53-5ae94a40eafe)
+
+- Find the names of the airlines with 0% delays in long and medium flights and 24.37% delays in short distance travel using the min() function to the columns.
+**Here are the recommended airlines with minimum delays that are safest to travel for each kind of travel distance:**
+- **Long flights (0% delay)**: Endeavor, Alaska, Jetblue, ExpressJet, Frontier, Hawaiian, Envoy, PSA, Skywest, PSA (initially US Airway Express), Southwest, JSX, Mesa
+- **Medium flights (0% delays)**: Endeavor
+- **Short flights (24.37% delays)**: Mesa
+
+__________________________
+**Do you observe any pattern in the time of departure of flights of long duration?**
+
+- Create a cross-tab of the 'Time' and 'duration' column for 'long' duration column values.
+- Create a dataset filtered_data using the .loc[] function and filtering values for long duration travel.
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/9bcce9fc-72e5-43d3-975c-b558ccb55881)
+
+- Use .describe() function to get the following values:
+count     559.000000
+mean      840.635063
+std       221.020092
+min       540.000000
+25%       670.000000
+50%       717.000000
+75%      1045.000000
+max      1310.000000
+
+- **Departure Time Range**: The departure times range from the minimum value of 540 minutes (after midnight) to the maximum value of 1310 minutes. This suggests that the flights in the dataset have departure times spanning throughout the day.
+
+- **Average Departure Time**: The average departure time, represented by the mean of approximately 840.64 minutes, indicates that, on average, flights tend to depart around 8:40 AM (assuming midnight as the starting point).
+
+- **Variability of Departure Times**: The standard deviation of approximately 221.02 minutes suggests that the departure times have a moderate amount of variability or spread around the mean. This indicates that departure times are not tightly clustered around a specific time but rather exhibit some degree of dispersion.
+
+- **Quartiles**: The 25th percentile (first quartile) value of 670 minutes and the 75th percentile (third quartile) value of 1045 minutes indicate that 25% of the flights depart before 6:10 AM (approximately) and 75% of the flights depart before 5:45 PM (approximately). This information helps understand the distribution of departure times
+
+- Plot a histogram chart for visualization:
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/40557965-7c28-459e-8f07-b1f1d36dcec6)
+- **Maximum** number of flights are departing at ~700 minutes, i.e. around 11:40 AM. 
+- There are **two empty time zones**, ~(900-1000) and ~(1160-1240) when no long distances flights depart. 
+
+- You can also plot a line chart:
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/071000f9-68d8-4c30-aa4b-392dd1f28012)
+- Maxium number of flights depart between ~(660-710) minutes from midnight.
+- The two empty zones identified above are not ture. There are some flights departing at almost every time stamp. 
+
+
+
 
