@@ -24,9 +24,9 @@ from xgboost import XGBClassifier # for classification <br>
 - create a **new dataset containing airport iata code, type of airport, elevation of airport, and the number of runways**. All of which could play a role in delays.
 - **add info about the AirportFrom** values by combining the airlines and air_run datasets based on the AirportFrom and iata_code columns, this would give us the **count of runways, elevation, and iata_code of the airports from where flights take off**. Something that could be a factor in delays. 
 - **add similar info about the destination airports**. This would also be a factor in flights delays. For eg: if the destination airport has only one runway, flights would have to park themselves and wait for their turn to land resulting in delays. But this time we will use combined_data instead of airlines since we have all the info from airlines dataset from previous steps. 
-- As is with every profession, the amount of experience we have plays an important role in our performance. Applying that logic to airline delays, let's **extract experience info about each airline in our dataset** from "https://en.wikipedia.org/wiki/List_of_airlines_of_the_United_States" using Beautiful Soup class from bs4 and requests lib.
+- As is with every profession, the amount of experience we have plays an important role in our performance. Applying that logic to airline delays, let's **extract experience info about each airline in our dataset** from "https://en.wikipedia.org/wiki/List_of_airlines_of_the_United_States" using **Beautiful Soup class from bs4 and requests lib.**
 - Apart from the experience, the traffic of the airport is also a factor in delays. If your source/destination airport sees a lot of traffic, naturally the take-off and landing times will be affected. For this step, **we will extract info from** https://en.wikipedia.org/wiki/List_of_the_busiest_airports_in_the_United_States But this wikipedia page was updated recently, so I am **using a previous version of the wikipedia page of 13 April 2023** from this URL: https://en.wikipedia.org/w/index.php?title=List_of_the_busiest_airports_in_the_United_States&oldid=1149689977
-- Collate the dataset into combined_data_traffic: ultimate dataset with all the relevant info from previous tables.
+- Collate the dataset into **combined_data_traffic**: ultimate dataset with all the relevant info from previous tables.
 - Treat missing values:
 id                                 0
 Airline                            0
@@ -48,8 +48,18 @@ data_2021_source_airport       83582
 iata_code_dest                 83531
 data_2021_dest_airport         83531
 Founded                        83601
-- For type, elevation_ft, and runway_count values, we will find the relevant info for 'CYS' i.e 'Cheyenne Regional Jerry Olson Field' from previous datasets and add them to the combined_data_traffic dataset.
-- We will remove the iata_code columns for source and destination airport since the AirportFrom and AirportTo columns have the same info. 
-- For Founded column we can extract the information about the founding year of airlines (US, EV, and CO) from the internet and add the values in the missing rows. 
-- For traffic data 2021 of source and destination airports, we will first impute missing values with the median() value of the airport. And remove the remaining left after the process.
--
+- For type, elevation_ft, and runway_count values, we will **find the relevant info for 'CYS' i.e 'Cheyenne Regional Jerry Olson Field'** from previous datasets and add them to the combined_data_traffic dataset.
+- We will **remove the iata_code columns for source and destination airport** since the AirportFrom and AirportTo columns have the same info. 
+- For Founded column we can **extract the information about the founding year of airlines (US, EV, and CO) from the internet** and add the values in the missing rows. 
+- For traffic data 2021 of source and destination airports, we will first **impute missing values with the median() value of the airport**. And remove the remaining left after the process.
+![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/98000f14-298f-4924-ad89-36baa39da227)
+___________
+**According to data provided, around 70% of the flights are delayed for Southwest Airlines. Visualize to compare the same for other airlines.**
+- Calculate the % of delays for SouthWest Airlines and cross-check the stats in first task.
+round((cdt[cdt.Airline == southwestid].Delay.sum()/
+      cdt[cdt.Airline == southwestid].Delay.size)*100)
+- Plot a bar chart:
+-![image](https://github.com/assr-droid/US-Airlines-Delay-Analysis-2023-/assets/75217839/be793835-0a60-403a-ac7b-18e766052172)
+- **As we can see in the above bar chart, SouthWest airlines has the most delayed flgihts i.e. 69.8% to be exact.**
+**Mesa** is the airlines with least delays.
+
